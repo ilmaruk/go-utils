@@ -1,14 +1,13 @@
 package random_test
 
 import (
-	"math/rand"
 	"testing"
 
 	"github.com/ilmaruk/go-utils/random"
 	"github.com/stretchr/testify/require"
 )
 
-func TestChoice(t *testing.T) {
+func TestRand_Choice(t *testing.T) {
 	testCases := []struct {
 		name     string
 		items    []int
@@ -31,12 +30,11 @@ func TestChoice(t *testing.T) {
 		},
 	}
 
-	zeroRand := rand.New(rand.NewSource(0))
+	rnd := random.NewWithSeed[int](0)
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			random.SetRand(zeroRand)
-			val := random.Choice(tc.items)
+			val := rnd.Choice(tc.items)
 			require.Equal(t, tc.expected, val)
 		})
 	}
