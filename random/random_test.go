@@ -39,3 +39,11 @@ func TestRand_Choice(t *testing.T) {
 		})
 	}
 }
+
+func TestRand_Shuffle(t *testing.T) {
+	input := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+	rnd := random.NewWithSeed[int](0)
+	output := rnd.Shuffle(input)
+	require.ElementsMatch(t, input, output)
+	require.NotEqual(t, input, output)
+}
